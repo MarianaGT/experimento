@@ -1,3 +1,3 @@
 class Symptom < ApplicationRecord
-  has_many :diseases, :as => :relatable
+  has_many :diseases, as: :relatable
 end

@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_173847) do
+ActiveRecord::Schema.define(version: 2020_07_16_234007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "diseases", force: :cascade do |t|
     t.string "name"
-    t.string "relatable_type"
-    t.bigint "relatable_id"
+    t.string "relatable_type", null: false
+    t.bigint "relatable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["relatable_type", "relatable_id"], name: "index_diseases_on_relatable_type_and_relatable_id"
@@ -26,18 +26,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_173847) do
 
   create_table "signs", force: :cascade do |t|
     t.string "name"
-    t.bigint "disease_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["disease_id"], name: "index_signs_on_disease_id"
   end
 
   create_table "symptoms", force: :cascade do |t|
     t.string "name"
-    t.bigint "disease_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["disease_id"], name: "index_symptoms_on_disease_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +48,4 @@ ActiveRecord::Schema.define(version: 2020_07_16_173847) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "signs", "diseases"
-  add_foreign_key "symptoms", "diseases"
 end

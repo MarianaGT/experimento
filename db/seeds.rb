@@ -10,6 +10,7 @@ sign2 = Sign.create!(name: "irritación")
 
 disease1 = Disease.create(name: 'Covid-19')
 symptom1.diseases << disease1
+symptom1.save
 symptom2.diseases << disease1
 # symptom3.diseases << disease1
 # disease2 = Disease.create!(name: 'Faringitis')
